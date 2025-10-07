@@ -1,0 +1,26 @@
+name: build x86-64
+
+permissions:
+  contents: read # This is required to allow the workflow to read the repository contents
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  release:
+    types: [ published ]
+
+jobs:
+  kaitai-struct-compiler:
+    name: Run kaitai-struct compiler for all target languages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Kaitai-Struct Compiler
+        run: | 
+          curl -fsSLO https://github.com/kaitai-io/kaitai_struct_compiler/releases/download/0.11/kaitai-struct-compiler_0.11_all.deb
+          sudo apt-get install ./kaitai-struct-compiler_0.11_all.deb
+      - name: Run compiler for all target languages
+        run: kaitai-struct-compiler --target all --outdir out webassembly.ksy

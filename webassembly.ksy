@@ -15,7 +15,7 @@ doc: |
   This document describes the binary format of a WebAssembly module 
   following the version 1.0 of the core WebAssembly standard.
 
-  Author: Henry Thasler
+  Repository: https://github.com/henrythasler/wasm-kaitai-struct
 
   * Naming of entities follows the official specification.
   * All integers are encoded using the LEB128 variable-length integer encoding (see vlq_base128_le.ksy).
@@ -25,7 +25,6 @@ doc: |
 
 doc-ref: |
   * https://www.w3.org/TR/wasm-core-1/
-  * https://doc.kaitai.io/ksy_style_guide.html
 
 seq:
   - id: magic
