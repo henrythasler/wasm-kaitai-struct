@@ -1,3 +1,5 @@
+[![build x86-64](https://github.com/henrythasler/wasm-kaitai-struct/actions/workflows/build-x86-64.yml/badge.svg)](https://github.com/henrythasler/wasm-kaitai-struct/actions/workflows/build-x86-64.yml)
+
 # wasm-kaitai-struct
 
 A [Kaitai Struct](https://kaitai.io) definition for [WebAssembly](https://webassembly.org/) binary files.
