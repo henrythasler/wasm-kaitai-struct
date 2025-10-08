@@ -1,1 +1,6 @@
 out
+**/venv
+.vscode
+tests/vlq_base128_le.py
+tests/webassembly.py
+**/__pycache__

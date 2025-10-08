@@ -58,18 +58,18 @@ types:
         type: 
           switch-on: id
           cases:
-            'section_id::custom': custom_section
-            'section_id::type': type_section
-            'section_id::import': import_section
-            'section_id::function': function_section
-            'section_id::table': table_section
-            'section_id::memory': memory_section
-            'section_id::global': global_section
-            'section_id::export': export_section
-            'section_id::start': start_section
-            'section_id::element': element_section
-            'section_id::code': code_section
-            'section_id::data': data_section
+            'section_id::custom_section': custom_section
+            'section_id::type_section': type_section
+            'section_id::import_section': import_section
+            'section_id::function_section': function_section
+            'section_id::table_section': table_section
+            'section_id::memory_section': memory_section
+            'section_id::global_section': global_section
+            'section_id::export_section': export_section
+            'section_id::start_section': start_section
+            'section_id::element_section': element_section
+            'section_id::code_section': code_section
+            'section_id::data_section': data_section
         doc: Section content
 
   custom_section:
@@ -123,7 +123,7 @@ types:
         type: vlq_base128_le
       - id: valtype
         type: u1
-        enum: valtype
+        enum: val_types
         repeat: expr
         repeat-expr: num_types.value
         doc: Value Types
@@ -153,10 +153,10 @@ types:
         type: 
           switch-on: import_type
           cases:
-            'import_types::func': vlq_base128_le
-            'import_types::table': table
-            'import_types::mem': memory
-            'import_types::global': global
+            'import_types::func_type': vlq_base128_le
+            'import_types::table_type': table
+            'import_types::mem_type': memory
+            'import_types::global_type': global
   
   table:
     seq:
@@ -189,7 +189,7 @@ types:
     seq:
       - id: valtype
         type: u1
-        enum: valtype
+        enum: val_types
       - id: is_mutable
         type: u1
         doc: the `is_` prefix avoids conflicts with the C++ keyword `mutable` in generated code
@@ -322,7 +322,7 @@ types:
         type: vlq_base128_le
       - id: valtype
         type: u1
-        enum: valtype
+        enum: val_types
 
   data_section:
     doc: (11) - Vector of data segments
@@ -349,20 +349,20 @@ types:
 
 enums:
   section_id:
-    0: custom
-    1: type
-    2: import
-    3: function
-    4: table
-    5: memory
-    6: global
-    7: export
-    8: start
-    9: element
-    10: code
-    11: data
+    0: custom_section
+    1: type_section
+    2: import_section
+    3: function_section
+    4: table_section
+    5: memory_section
+    6: global_section
+    7: export_section
+    8: start_section
+    9: element_section
+    10: code_section
+    11: data_section
 
-  valtype:
+  val_types:
     0x7f: i32
     0x7E: i64
     0x7D: f32
@@ -373,13 +373,13 @@ enums:
     0x70: element
 
   export_types:
-    0x00: func
-    0x01: table
-    0x02: mem
-    0x03: global
+    0x00: func_type
+    0x01: table_type
+    0x02: mem_type
+    0x03: global_type
 
   import_types:
-    0x00: func
-    0x01: table
-    0x02: mem
-    0x03: global
+    0x00: func_type
+    0x01: table_type
+    0x02: mem_type
+    0x03: global_type
