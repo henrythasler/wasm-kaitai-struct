@@ -44,6 +44,15 @@ There are currently two other versions of Kaitai Struct definitions for WebAssem
 
 For these reasons I created a new Kaitai Struct definition from scratch using only the official specification as reference and the [Kaitai Web IDE](https://ide.kaitai.io/) for testing. This resulted in a 25% smaller (lines) schema file while being fully compliant with the WebAssembly specification.
 
+## Run Unit-Tests
+
+```
+$ python3 -m venv venv && source venv/bin/activate
+$ python3 -m pip install --upgrade kaitaistruct
+$ kaitai-struct-compiler --target python --outdir tests webassembly.ksy
+$ python3 tests/test_sections.py
+```
+
 ## References
 
 - [WebAssembly Core Specification — W3C Recommendation, 5 December 2019](https://www.w3.org/TR/wasm-core-1)

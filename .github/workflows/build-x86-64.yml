@@ -24,11 +24,25 @@ jobs:
           sudo apt-get install ./kaitai-struct-compiler_0.11_all.deb
       - name: Run compiler for all target languages
         run: kaitai-struct-compiler --target all --outdir out webassembly.ksy
+
+  unit-tests-python:
+    name: Run python unit-tests
+    runs-on: ubuntu-latest
+    needs: kaitai-struct-compiler
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Kaitai-Struct Compiler
+        run: | 
+          curl -fsSLO https://github.com/kaitai-io/kaitai_struct_compiler/releases/download/0.11/kaitai-struct-compiler_0.11_all.deb
+          sudo apt-get install ./kaitai-struct-compiler_0.11_all.deb
       - name: set up python environment
         run: python3 -m venv venv && source venv/bin/activate
-      - name: install 
-        run: python3 -m pip install --upgrade kaitaistruct
+      - name: install python packages
+        run: python3 -m pip install --upgrade kaitaistruct pytest pytest-cov
       - name: generate python code for tests
         run: kaitai-struct-compiler --target python --outdir tests webassembly.ksy
       - name: run tests
-        run: python3 tests/test_sections.py
+        run: coverage run -m pytest tests
+      - name: Coverage Report
+        run: coverage report -m
