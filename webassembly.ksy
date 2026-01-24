@@ -156,7 +156,7 @@ types:
             'import_types::func_type': vlq_base128_le
             'import_types::table_type': table
             'import_types::mem_type': memory
-            'import_types::global_type': global
+            'import_types::global_type': global_import
   
   table:
     seq:
@@ -185,7 +185,7 @@ types:
       - id: limits
         type: limits
 
-  global:
+  global_import:
     seq:
       - id: valtype
         type: u1
@@ -195,8 +195,6 @@ types:
         enum: mutability_types
         valid:
           any-of: [mutability_types::const, mutability_types::var]
-      - id: init_expr
-        terminator: 0x0b
 
   function_section:
     doc: (id 3) - Vector of type indices (see `Type Section`) for all functions in the `Code Section`
@@ -237,6 +235,19 @@ types:
       - id: globals
         type: global
         repeat: eos
+
+  global:
+    seq:
+      - id: valtype
+        type: u1
+        enum: val_types
+      - id: mutability
+        type: u1
+        enum: mutability_types
+        valid:
+          any-of: [mutability_types::const, mutability_types::var]
+      - id: init_expr
+        terminator: 0x0b
 
   export_section:
     doc: (id 7) - Exported entities
