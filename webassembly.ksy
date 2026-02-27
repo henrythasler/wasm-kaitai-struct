@@ -236,6 +236,15 @@ types:
         type: global
         repeat: eos
 
+  expression:
+    seq:
+      - id: bytes
+        type: u1
+        repeat: until
+        repeat-until: |
+          bytes[bytes.size - 1] == 0x0b and
+          (bytes.size == 1 or bytes[bytes.size - 2] < 0x80)
+
   global:
     seq:
       - id: valtype
@@ -247,7 +256,7 @@ types:
         valid:
           any-of: [mutability_types::const, mutability_types::var]
       - id: init_expr
-        terminator: 0x0b
+        type: expression
 
   export_section:
     doc: (id 7) - Exported entities
@@ -292,7 +301,7 @@ types:
       - id: tableidx
         type: vlq_base128_le
       - id: offset_expr
-        terminator: 0x0b
+        type: expression
         doc: The offset is given by a constant expression that DOES NOT include an end marker
         doc-ref: https://www.w3.org/TR/wasm-core-1/#valid-constant
       - id: num_init
@@ -354,7 +363,7 @@ types:
       - id: data_memidx
         type: vlq_base128_le
       - id: offset_expr
-        terminator: 0x0b
+        type: expression
         doc: The offset is given by a constant expression that DOES NOT include an end marker
         doc-ref: https://www.w3.org/TR/wasm-core-1/#valid-constant
       - id: num_init

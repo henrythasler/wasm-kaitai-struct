@@ -19,6 +19,9 @@
   
   ;; Import a mutable global
   (import "env" "globalMut" (global $globalMut (mut i32)))
+
+  ;; this is a special case where the LEB128 encoded number has 0x0B as it's last byte which collides with the init_exp terminator
+  (global $mut3 (mut i32) (i32.const 186384))
   
   ;; Export a function that uses all the imports
   (func (export "useImports") (result i32)
