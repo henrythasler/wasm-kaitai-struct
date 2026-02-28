@@ -50,7 +50,7 @@ For these reasons I created a new Kaitai Struct definition from scratch using on
 $ python3 -m venv venv && source venv/bin/activate
 $ python3 -m pip install --upgrade kaitaistruct
 $ kaitai-struct-compiler --target python --outdir tests webassembly.ksy
-$ python3 tests/test_sections.py
+$ coverage run -m pytest tests
 ```
 
 ## References

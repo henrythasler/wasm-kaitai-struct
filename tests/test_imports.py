@@ -6,12 +6,13 @@ def test_sections():
     
     assert module.magic == b'\x00asm'
     assert module.version == 1
-    assert len(module.sections) == 5
+    assert len(module.sections) == 6
 
     expected = [
         {"id": Webassembly.SectionId["type_section"], "len": 30},
         {"id": Webassembly.SectionId["import_section"], "len": 98},
         {"id": Webassembly.SectionId["function_section"], "len": 5},
+        {"id": Webassembly.SectionId["global_section"], "len": 8},
         {"id": Webassembly.SectionId["export_section"], "len": 56},
         {"id": Webassembly.SectionId["code_section"], "len": 59},
     ]
